@@ -159,6 +159,10 @@ var _Routes = __webpack_require__(7);
 
 var _Routes2 = _interopRequireDefault(_Routes);
 
+var _serializeJavascript = __webpack_require__(21);
+
+var _serializeJavascript2 = _interopRequireDefault(_serializeJavascript);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = function (req, store) {
@@ -176,7 +180,7 @@ exports.default = function (req, store) {
     )
   ));
 
-  return '\n    <html>\n      <head></head>\n      <body>\n        <div id="root">' + content + '</div>\n        <script>\n          window.INITIAL_STATE = ' + JSON.stringify(store.getState()) + '\n        </script>\n        <script src="bundle.js"></script>\n      </body>\n    </html>\n  ';
+  return '\n    <html>\n      <head></head>\n      <body>\n        <div id="root">' + content + '</div>\n        <script>\n          window.INITIAL_STATE = ' + (0, _serializeJavascript2.default)(store.getState()) + '\n        </script>\n        <script src="bundle.js"></script>\n      </body>\n    </html>\n  ';
 };
 
 /***/ }),
@@ -354,7 +358,7 @@ var fetchUsers = exports.fetchUsers = function fetchUsers() {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return _axios2.default.get('http://react-ssr-api.herokuapp.com/users');
+              return _axios2.default.get('http://react-ssr-api.herokuapp.com/users/');
 
             case 2:
               res = _context.sent;
@@ -532,6 +536,12 @@ exports.default = {
   loadData: loadData,
   component: (0, _reactRedux.connect)(mapStateToProps, { fetchUsers: _actions.fetchUsers })(UsersList)
 };
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports) {
+
+module.exports = require("serialize-javascript");
 
 /***/ })
 /******/ ]);
