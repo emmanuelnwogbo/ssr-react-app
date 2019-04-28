@@ -5,6 +5,8 @@ import axios from 'axios'
 
 class UsersList extends Component {
   componentDidMount() {
+    //WITH THE CURRENT SETUP WE COULD REMOVE THIS
+    //FUNCTION CALL. BUT THERE ARE SOME CAVEATS
     this.props.fetchUsers();
   }
 
@@ -30,4 +32,11 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, { fetchUsers })(UsersList);
+function loadData(store) {
+  return store.dispatch(fetchUsers());
+}
+
+export default {
+  loadData,
+  component: connect(mapStateToProps, { fetchUsers })(UsersList)
+}
